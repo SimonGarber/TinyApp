@@ -2,6 +2,9 @@ const express = require('express');
 const app = express();
 const PORT = 8080;
 const bodyParser = require("body-parser");
+const cookieParser = require(`cookie-parser`);
+
+app.use(cookieParser())
 app.use(bodyParser.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
@@ -32,26 +35,34 @@ app.get("/urls.json", (req,res) => {
 
 app.get("/hello", (req,res) => {
   let templateVars = {
+    username: req.cookies["username"],
     greeting: "Hello World!"
     };
     res.render("Hello_World", templateVars);
 });
 
 app.get("/urls", (req,res) => {
-  let templateVars = { 
-      urls: urlDatabase
+  let templateVars = {
+   username: req.cookies.username, 
+      urls: urlDatabase,
+      
   };
   res.render("urls_index", templateVars);
     
 });
 
 app.get("/urls/new", (req,res) => {
-  res.render("urls_new");  
+  let templateVars = {
+    username: req.cookies.username
+  }
+  
+  res.render("urls_new",templateVars);  
 });
 
 app.get("/urls/:shortURL", (req,res) => {
 // console.log(req.params.shortURL)
-let templateVars = { 
+let templateVars = {
+    username: req.cookies.username, 
     shortURL: req.params.shortURL, 
     longURL: urlDatabase[req.params.shortURL] 
 };
@@ -84,9 +95,22 @@ urlDatabase[shortURL] = req.body.longURL
 // req.body.longURL = urlDatabase[req.params.shortURL]
 // console.log(urlDatabase[req.params.id]) //Prints out the longURL we are editing
 // console.log(req.params.id) //Prints out the shortURL of the long
-console.log(urlDatabase)
 res.redirect("/urls")
 });
+
+app.post("/login", (req,res)=> {
+if(req.body.username){
+    // let username = req.body.username
+    res.cookie("username",req.body.username);
+    console.log(`Welcome to Tiny App ${req.body.username}!`);
+}
+res.redirect("/urls");
+});
+
+app.post("/logout", (req, res) => {
+res.clearCookie("username")
+res.redirect('/urls');   
+})
 
 app.listen(PORT, () => {
   console.log(`Example app listening on port ${PORT}!`);
