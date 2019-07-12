@@ -10,6 +10,8 @@
 </head>
 <body>
         <%  include ./partials/_header %>
+        <% if(user) { %>
+
   <main style="margin: 1em;">
     <h3>My URLs</h3>
     <table class="table">
@@ -45,6 +47,8 @@
             <% }; %>
           </tbody>
           </table>
+          <% } else { %>
+            <% } %>
         </main>
                     
       <!-- Bootstrap JS -->
