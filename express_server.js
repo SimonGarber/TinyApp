@@ -2,7 +2,7 @@
 const cookieSession = require('cookie-session');
 const express = require('express');
 const app = express();
-const PORT = 8080;
+const PORT = 5000;
 const bodyParser = require('body-parser');
 const bcrypt = require('bcrypt');
 const { findUserByEmail, emailLookUp, urlsForUser } = require('./helpers');
@@ -197,8 +197,8 @@ app.post('/register', (req, res) => {
   }
 });
 /*------------------------------------------------------------------------------------------------*/
-app.listen(5000, () => {
-  console.log(`Example app listening on port 5000!`);
+app.listen(PORT || 5000, () => {
+  console.log(`Example app listening on port ${PORT}!`);
 });
 /*------------------------------------------------------------------------------------------------*/
 
