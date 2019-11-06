@@ -7,6 +7,9 @@
     "start": "./node_modules/.bin/nodemon -L express_server.js",
     "test": "./node_modules/mocha/bin/mocha"
   },
+  "engines": {
+    "node": "12.13.0"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/SimonGarber/TinyApp.git"
