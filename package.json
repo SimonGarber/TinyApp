@@ -5,7 +5,8 @@
   "main": "express_server.js",
   "scripts": {
     "start": " node express_server.js",
-    "test": "./node_modules/mocha/bin/mocha"
+    "test": "./node_modules/mocha/bin/mocha",
+    "web": "node express_server.js"
   },
   "engines": {
     "node": "10.16.0"
