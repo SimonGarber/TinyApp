@@ -4,7 +4,7 @@
   "description": "LHL Week 3 project",
   "main": "express_server.js",
   "scripts": {
-    "start": " nodemon express_server.js",
+    "start": " node express_server.js",
     "test": "./node_modules/mocha/bin/mocha"
   },
   "engines": {
